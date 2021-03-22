@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.practise.sm.DAO.StudentDAO;
@@ -62,4 +64,14 @@ public class StudentController {
 	}
 	
 	
+	@GetMapping("/updateStudent")
+	public String updateStudent(@RequestParam("userId") int id, Model model)
+	{
+	System.out.println("heloo "+ id);
+	Student theStudent = studentService.getStudent(id);
+	//System.out.println(theStudent);
+	model.addAttribute("student", theStudent);
+		return "add-student";
+		
+	}
 }

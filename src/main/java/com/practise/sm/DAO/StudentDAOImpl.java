@@ -1,11 +1,9 @@
 package com.practise.sm.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.practise.sm.api.Student;
@@ -40,6 +38,13 @@ public class StudentDAOImpl implements StudentDAO {
 		
 		System.out.println("1 record updated..");
 		
+	}
+	//@Override
+	public Student getStudent(int id) {
+		String sql = "SELECT id, name, mobile, country\r\n"
+				+ "	FROM public.\"Students\"WHERE ID = ?;";
+		Student student = jdbcTemplate.queryForObject(sql, new rowMapper(), id);
+		return student;
 	}
 	
 
