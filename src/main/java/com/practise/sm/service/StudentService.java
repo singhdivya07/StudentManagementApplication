@@ -10,4 +10,8 @@ public interface StudentService {
 
 	void savaStudent(Student student);
 	Student getStudent(int id);
+
+	void update(Student student);
+
+	void deleteStudent(int id);
 }

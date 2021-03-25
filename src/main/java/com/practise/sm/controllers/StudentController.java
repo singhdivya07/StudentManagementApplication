@@ -57,8 +57,18 @@ public class StudentController {
 	{
 		System.out.println(student);
 		
-		studentService.savaStudent(student);
+		//if user do not have a id , insert operation
+		//if user has a id update operation
 		
+		if(student.getId()==0)
+		{
+			studentService.savaStudent(student);
+		}
+		else
+		{
+			studentService.update(student);
+		}
+				
 		return "redirect:/showStudent";
 		
 	}
@@ -67,11 +77,20 @@ public class StudentController {
 	@GetMapping("/updateStudent")
 	public String updateStudent(@RequestParam("userId") int id, Model model)
 	{
-	System.out.println("heloo "+ id);
+	//System.out.println("heloo "+ id);
 	Student theStudent = studentService.getStudent(id);
 	//System.out.println(theStudent);
 	model.addAttribute("student", theStudent);
 		return "add-student";
+		
+	}
+	
+	
+	@GetMapping("/deleteStudent")
+	public String deleteStudent(@RequestParam("userId") int id)
+	{
+	studentService.deleteStudent(id);
+		return "redirect:/showStudent";
 		
 	}
 }

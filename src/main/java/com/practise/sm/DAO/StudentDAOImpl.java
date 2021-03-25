@@ -36,7 +36,7 @@ public class StudentDAOImpl implements StudentDAO {
 		
 		jdbcTemplate.update(sql, sqlParameters);
 		
-		System.out.println("1 record updated..");
+		System.out.println("1 record inserted..");
 		
 	}
 	//@Override
@@ -45,6 +45,17 @@ public class StudentDAOImpl implements StudentDAO {
 				+ "	FROM public.\"Students\"WHERE ID = ?;";
 		Student student = jdbcTemplate.queryForObject(sql, new rowMapper(), id);
 		return student;
+	}
+	@Override
+	public void update(Student student) {
+		String sql ="update public.\"Students\" set name= ? , mobile =? , country = ? where id= ? ;  ";
+		jdbcTemplate.update(sql, student.getName(),student.getMobile(),student.getCountry(),student.getId() );
+		System.out.println("1 record updated..");
+	}
+	@Override
+	public void delete(int id) {
+		String sql ="delete from public.\"Students\" where id = ?;";
+		jdbcTemplate.update(sql, id);
 	}
 	
 
